@@ -6,6 +6,7 @@
         "gulp-browserify": "~0.3",
         "reactify": "~0.5",
         "express": "~3.4",
-        "react-tools": "~0.8"
+        "react-tools": "~0.8",
+        "morpheus": "~0.7"
     }
 }
