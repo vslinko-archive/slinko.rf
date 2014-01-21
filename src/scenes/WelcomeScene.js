@@ -8,6 +8,7 @@ var React = require('React');
 var SceneMixin = require('../mixins/SceneMixin');
 var Text = require('../components/Text');
 var Image = require('../components/Image');
+var Parallax = require('../components/Parallax');
 
 
 var WelcomeScene = React.createClass({
@@ -34,14 +35,20 @@ var WelcomeScene = React.createClass({
     render: function() {
         return (
             <div>
-                <Text ref="welcome"
-                      className="text--style-heading text--align-center"
-                      style={Style.welcome.initial}>
-                    Welcome
-                </Text>
-                <Image ref="photo"
-                       src="http://lorempixel.com/400/200"
-                       style={Style.photo.initial} />
+                <Parallax ratioX="5" ratioY="5">
+                    <Text ref="welcome"
+                          className="text--style-heading text--align-center"
+                          style={Style.welcome.initial}
+                          parallax={Style.welcome.parallax}>
+                        Welcome
+                    </Text>
+                </Parallax>
+                <Parallax>
+                    <Image ref="photo"
+                           src="http://lorempixel.com/400/200"
+                           style={Style.photo.initial}
+                           parallax={Style.photo.parallax} />
+                </Parallax>
             </div>
         );
     }
