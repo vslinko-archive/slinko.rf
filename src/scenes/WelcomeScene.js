@@ -5,11 +5,14 @@
 
 
 var React = require('React');
-var morpheus = require('morpheus');
+var SceneMixin = require('../mixins/SceneMixin');
 var Text = require('../components/Text');
+var Image = require('../components/Image');
 
 
 var WelcomeScene = React.createClass({
+    mixins: [SceneMixin],
+
     getBackgroundState: function() {
         return {
             type: 'color',
@@ -17,8 +20,15 @@ var WelcomeScene = React.createClass({
         };
     },
 
-    componentDidMount: function() {
-        morpheus(this.refs.welcome.getDOMNode(), Style.welcome.animation);
+    getDelayedRefs: function() {
+        return ['photo'];
+    },
+
+    getShowAnimations: function() {
+        return {
+            welcome: Style.welcome.show,
+            photo: Style.photo.show
+        };
     },
 
     render: function() {
@@ -29,6 +39,9 @@ var WelcomeScene = React.createClass({
                       style={Style.welcome.initial}>
                     Welcome
                 </Text>
+                <Image ref="photo"
+                       src="http://lorempixel.com/400/200"
+                       style={Style.photo.initial} />
             </div>
         );
     }
@@ -39,14 +52,25 @@ var Style = {
     welcome: {
         initial: {
             top: 320,
+            left: 0,
             opacity: 0,
             fontSize: '64px',
             color: '#ffffff'
         },
-        animation: {
+        show: {
             opacity: 1,
             top: 300,
             duration: 700
+        }
+    },
+    photo: {
+        initial: {
+            bottom: -500,
+            left: 20
+        },
+        show: {
+            bottom: 0,
+            duration: 500
         }
     }
 };
